@@ -1,0 +1,36 @@
+.Auth {
+  margin: 20px auto;
+  width: 500px;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
+  padding: 10px 18px 10px 10px;
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+input:focus {
+  outline: none;
+  background-color: #ccc;
+}
+
+.Invalid {
+  border: 1px solid red;
+  background-color: #FDA494;
+}
+
+/* @media (min-width: 600px) {
+  .Auth {
+    width: 500px;
+  }
+} */
