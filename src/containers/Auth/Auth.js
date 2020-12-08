@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Button from '../../components/UI/Button/Button';
 import classes from './Auth.module.css';
+import axios from 'axios';
 
 class Auth extends Component {
   state = {
@@ -22,8 +23,15 @@ class Auth extends Component {
       username: this.state.username,
       password: this.state.password
     };
+    const url = 'http://localhost:8080/login';
     console.log(body);
-    this.props.tempLogin();
+    axios.post(url, body)
+      .then(response => {
+        console.log(response);
+        const jwt = response.headers.authorization.split(" ")[1]
+        this.props.saveJWT(jwt)
+      })
+    console.log("denied")
   }
 
   toggleAuthMode = () => {
