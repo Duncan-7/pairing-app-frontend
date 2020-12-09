@@ -23,15 +23,31 @@ class Auth extends Component {
       username: this.state.username,
       password: this.state.password
     };
+    if(this.state.isSignUp) {
+      this.sendSignupRequest(body);
+    } else {
+      this.sendLoginRequest(body);
+    }
+  }
+
+  sendSignupRequest = (body) => {
+    const url = 'http://localhost:8080/users/sign-up';
+    axios.post(url, body)
+      .then(response => {
+        console.log(response);
+        console.log("User created")
+        this.sendLoginRequest(body)
+      })
+  }
+
+  sendLoginRequest = (body) => {
     const url = 'http://localhost:8080/login';
-    console.log(body);
     axios.post(url, body)
       .then(response => {
         console.log(response);
         const jwt = response.headers.authorization.split(" ")[1]
         this.props.saveJWT(jwt)
       })
-    console.log("denied")
   }
 
   toggleAuthMode = () => {
