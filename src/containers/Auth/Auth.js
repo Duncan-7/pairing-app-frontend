@@ -19,17 +19,11 @@ class Auth extends Component {
 
   onSubmitHander = (event) => {
     event.preventDefault();
-    // real code:
-    // const body = {
-    //   username: this.state.username,
-    //   password: this.state.password
-    // };
-
-    //I'm really lazy, so made dummy version
     const body = {
-      username: "test@example.com",
-      password: "test"
+      username: this.state.username,
+      password: this.state.password
     };
+
     if(this.state.isSignUp) {
       this.sendSignupRequest(body);
     } else {

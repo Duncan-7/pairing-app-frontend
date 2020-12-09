@@ -18,7 +18,8 @@ class App extends Component {
   componentDidMount() {
     this.checkCredentials();
   }
-
+  
+  //save JWT and user details in local storage on login
   saveCredentials = (jwt, user) => {
     this.setState({
       jwt: jwt,
@@ -28,6 +29,7 @@ class App extends Component {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
+  //on startup check if there are saved credentials
   checkCredentials = () => {
     const jwt = localStorage.getItem('jwt');
     const user = JSON.parse(localStorage.getItem('user'))
