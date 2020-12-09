@@ -16,22 +16,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.checkJWT();
+    this.checkCredentials();
   }
 
-  saveJWT = (jwt) => {
+  saveCredentials = (jwt, user) => {
     this.setState({
-      jwt: jwt
+      jwt: jwt,
+      user: user
     })
     localStorage.setItem('jwt', jwt);
-    console.log(localStorage.getItem('jwt'))
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
-  checkJWT = () => {
+  checkCredentials = () => {
     const jwt = localStorage.getItem('jwt');
-    if(jwt != null) {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if(jwt != null && user != null) {
       this.setState({
-        jwt: jwt
+        jwt: jwt,
+        user: user
       })
     }
     this.setState({
@@ -66,7 +69,7 @@ class App extends Component {
           <Route path="/auth" render={(props) => <Auth 
                                                     {...props} 
                                                     tempLogin={this.login} 
-                                                    saveJWT={this.saveJWT}/>} />
+                                                    saveCredentials={this.saveCredentials}/>} />
           <Redirect to="/auth" />
         </Switch>
       )
