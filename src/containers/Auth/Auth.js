@@ -19,9 +19,16 @@ class Auth extends Component {
 
   onSubmitHander = (event) => {
     event.preventDefault();
+    // real code:
+    // const body = {
+    //   username: this.state.username,
+    //   password: this.state.password
+    // };
+
+    //I'm really lazy, so made dummy version
     const body = {
-      username: this.state.username,
-      password: this.state.password
+      username: "test@example.com",
+      password: "test"
     };
     if(this.state.isSignUp) {
       this.sendSignupRequest(body);
@@ -45,8 +52,18 @@ class Auth extends Component {
     axios.post(url, body)
       .then(response => {
         console.log(response);
-        const jwt = response.headers.authorization.split(" ")[1]
-        this.props.saveJWT(jwt)
+        const jwt = response.headers.authorization.split(" ")[1];
+        //get user details from response data, definitely easier way to do this
+        let responseData = response.data;
+        responseData = responseData.substr(1).slice(0, -1);
+        let properties = responseData.split(", ")
+        const id = parseInt(properties[0].split("=")[1], 10);
+        const username = properties[1].split("=")[1].substr(1).slice(0, -1);
+        const user = {
+          id: id,
+          username: username
+        }
+        this.props.saveCredentials(jwt, user);
       })
   }
 
