@@ -4,6 +4,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Aux/Aux';
 import Match from './Match/Match';
 import axios from 'axios';
+import moment from 'moment';
 
 class Matches extends Component {
   state = {
@@ -46,6 +47,10 @@ class Matches extends Component {
       })
   }
 
+  formatDate = (date) => {
+    const newDate = new Date(date);
+    return moment(newDate).format('h:mm:ss a, MMMM Do YYYY');
+  }
 
   render() {
     let matches = <Spinner />
@@ -55,12 +60,13 @@ class Matches extends Component {
                   key={match.id}
                   user1={match.user1}
                   user2={match.user2}
-                  startTime={match.start_time} />
+                  startTime={this.formatDate(match.start_time)} />
       })
     }
     return(
       <Aux>
         <Button btnType="Neutral" clicked={this.createMatches}>Make Matches</Button>
+        <h1>Here are your matches:</h1>
         {matches}
       </Aux>
     )
