@@ -8,6 +8,7 @@ class Auth extends Component {
     isSignUp: false,
     error: false,
     username: "",
+    email: "",
     password: ""
   }
 
@@ -19,14 +20,21 @@ class Auth extends Component {
 
   onSubmitHander = (event) => {
     event.preventDefault();
-    const body = {
-      username: this.state.username,
-      password: this.state.password
-    };
+    
+    
 
     if(this.state.isSignUp) {
+      const body = {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      };
       this.sendSignupRequest(body);
     } else {
+      const body = {
+        username: this.state.username,
+        password: this.state.password
+      };
       this.sendLoginRequest(body);
     }
   }
@@ -69,10 +77,30 @@ class Auth extends Component {
   }
 
   render() {
-    return(
-      <div className={classes.Auth}>
-        <form onSubmit={this.onSubmitHander}> 
+    let form = <form onSubmit={this.onSubmitHander}> 
+    <input 
+      type="text" 
+      placeholder="Username" 
+      name="username" 
+      onChange={(event) => this.onChangeHandler(event)}/>
+    <input 
+      type="password" 
+      placeholder="Password" 
+      name="password" 
+      onChange={(event) => this.onChangeHandler(event)} />
+    <Button btnType="Success">
+      {this.state.isSignUp ? "Create Account" : "Log In"}
+    </Button><br/>
+  </form>
+
+  if (this.state.isSignUp) {
+    form = <form onSubmit={this.onSubmitHander}> 
           <input 
+            type="text" 
+            placeholder="Email" 
+            name="email" 
+            onChange={(event) => this.onChangeHandler(event)}/>
+            <input 
             type="text" 
             placeholder="Username" 
             name="username" 
@@ -86,6 +114,10 @@ class Auth extends Component {
             {this.state.isSignUp ? "Create Account" : "Log In"}
           </Button><br/>
         </form>
+  }
+    return(
+      <div className={classes.Auth}>
+        {form}
         <Button 
           btnType="Neutral" 
           clicked={this.toggleAuthMode}>
