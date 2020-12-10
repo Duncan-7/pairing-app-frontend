@@ -24,15 +24,17 @@ class Auth extends Component {
     
 
     if(this.state.isSignUp) {
+      //all the names are mixed up to make backend work, sorry
       const body = {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password
+        fullName: this.state.username,
+        username: this.state.email,
+        password: this.state.password,
+        active: false
       };
       this.sendSignupRequest(body);
     } else {
       const body = {
-        username: this.state.username,
+        username: this.state.email,
         password: this.state.password
       };
       this.sendLoginRequest(body);
@@ -51,6 +53,7 @@ class Auth extends Component {
 
   sendLoginRequest = (body) => {
     const url = 'http://localhost:8080/login';
+    console.log(body)
     axios.post(url, body)
       .then(response => {
         console.log(response);
@@ -81,7 +84,7 @@ class Auth extends Component {
     <input 
       type="text" 
       placeholder="Username" 
-      name="username" 
+      name="email" 
       onChange={(event) => this.onChangeHandler(event)}/>
     <input 
       type="password" 
