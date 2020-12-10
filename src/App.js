@@ -4,6 +4,7 @@ import Auth from './containers/Auth/Auth';
 import Spinner from './components/UI/Spinner/Spinner';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
+import Matches from './containers/Matches/Matches';
 
 import './App.css';
 import Home from './components/Home/Home';
@@ -70,7 +71,6 @@ class App extends Component {
         <Switch>
           <Route path="/auth" render={(props) => <Auth 
                                                     {...props} 
-                                                    tempLogin={this.login} 
                                                     saveCredentials={this.saveCredentials}/>} />
           <Redirect to="/auth" />
         </Switch>
@@ -81,6 +81,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />
+          <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} jwt={this.state.jwt}/>} />
           <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} />} />
           <Redirect to="/" />
         </Switch>

@@ -9,6 +9,7 @@ const NavigationLinks = (props) => {
   if (props.isAuth) {
     authLinks = <ul className={classes.NavLinks} onClick={props.closer}>
       <NavigationLink link="/" exact>Home</NavigationLink>
+      <NavigationLink link="/matches">Matches</NavigationLink>
       <NavigationLink link="/logout">Logout</NavigationLink>
     </ul>
   }
