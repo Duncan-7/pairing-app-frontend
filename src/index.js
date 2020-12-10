@@ -6,8 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from './axios-instance';
 
+const JWTtoken = localStorage.getItem('jwt');
+
 axios.interceptors.request.use(config => {
-  const JWTtoken = localStorage.getItem('jwt');
+  
   config.headers.authorization = `Bearer ${JWTtoken}`;
   return config;
 },

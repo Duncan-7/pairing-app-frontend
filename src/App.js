@@ -17,6 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //check if we have jwt and user details stored already
     this.checkCredentials();
   }
   
@@ -28,6 +29,7 @@ class App extends Component {
     })
     localStorage.setItem('jwt', jwt);
     localStorage.setItem('user', JSON.stringify(user));
+    this.setAxiosInterceptor(jwt);
   }
 
   //on startup check if there are saved credentials
@@ -35,6 +37,7 @@ class App extends Component {
     const jwt = localStorage.getItem('jwt');
     const user = JSON.parse(localStorage.getItem('user'))
     if(jwt != null && user != null) {
+      this.setAxiosInterceptor(jwt);
       this.setState({
         jwt: jwt,
         user: user
@@ -43,6 +46,15 @@ class App extends Component {
     this.setState({
       loaded: true
     })
+  }
+
+  setAxiosInterceptor = (jwt) => {
+    axios.interceptors.request.use(config => {
+      config.headers.authorization = `Bearer ${jwt}`;
+      return config;
+    },
+      error => Promise.reject(error)
+    );
   }
 
   testJWT = () => {
@@ -89,7 +101,7 @@ class App extends Component {
     }
 
     return (
-      <Layout>
+      <Layout isAuth={!!this.state.jwt}>
         <div className="App">
           {routes}
         </div>
