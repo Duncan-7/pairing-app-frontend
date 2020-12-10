@@ -3,8 +3,9 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Aux/Aux';
 import Match from './Match/Match';
-import axios from 'axios';
+import axios from '../../axios-instance';
 import moment from 'moment';
+
 
 class Matches extends Component {
   state = {
@@ -17,13 +18,8 @@ class Matches extends Component {
   }
 
   getMatches = () => {
-    const url = 'http://localhost:8080/matches';
-    let config = {
-      headers: {
-        'Authorization': 'Bearer ' + this.props.jwt
-      }
-    }
-    axios.get(url, config)
+    const url = '/matches';
+    axios.get(url)
       .then(response => {
         console.log(response);
         this.setState({
@@ -34,14 +30,9 @@ class Matches extends Component {
   }
 
   createMatches = () => {
-    const url = 'http://localhost:8080/matches';
+    const url = '/matches';
     let body = {}
-    let config = {
-      headers: {
-        'Authorization': 'Bearer ' + this.props.jwt
-      }
-    }
-    axios.post(url, body, config)
+    axios.post(url, body)
       .then(response => {
         console.log(response);
       })
