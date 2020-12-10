@@ -8,7 +8,7 @@ import Matches from './containers/Matches/Matches';
 
 import './App.css';
 import Home from './components/Home/Home';
-import axios from 'axios';
+import axios from './axios-instance';
 
 class App extends Component {
   state = {
@@ -46,12 +46,12 @@ class App extends Component {
   }
 
   testJWT = () => {
-    let config = {
-      headers: {
-        'Authorization': 'Bearer ' + this.state.jwt
-      }
-    }
-    axios.get('http://localhost:8080/test', config)
+    // let config = {
+    //   headers: {
+    //     'Authorization': 'Bearer ' + this.state.jwt
+    //   }
+    // }
+    axios.get('/test')
       .then(response => {
         console.log(response);
       })

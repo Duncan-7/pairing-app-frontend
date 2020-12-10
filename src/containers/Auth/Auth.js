@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Button from '../../components/UI/Button/Button';
 import classes from './Auth.module.css';
-import axios from 'axios';
+import axios from '../../axios-instance';
 
 class Auth extends Component {
   state = {
@@ -32,7 +32,7 @@ class Auth extends Component {
   }
 
   sendSignupRequest = (body) => {
-    const url = 'http://localhost:8080/users/sign-up';
+    const url = '/users/sign-up';
     axios.post(url, body)
       .then(response => {
         console.log(response);
