@@ -4,17 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from './axios-instance';
-
-const JWTtoken = localStorage.getItem('jwt');
-
-axios.interceptors.request.use(config => {
-  
-  config.headers.authorization = `Bearer ${JWTtoken}`;
-  return config;
-},
-  error => Promise.reject(error)
-);
 
 ReactDOM.render(
   <React.StrictMode>
