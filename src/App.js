@@ -8,6 +8,7 @@ import Matches from './containers/Matches/Matches';
 
 import './App.css';
 import Home from './components/Home/Home';
+import Profile from './containers/Profile/Profile';
 import axios from './axios-instance';
 
 class App extends Component {
@@ -94,6 +95,7 @@ class App extends Component {
         <Switch>
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />
           <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} jwt={this.state.jwt}/>} />
+          <Route path="/profile" render={(props) => <Profile {...props} current_user={this.state.user} />} />
           <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} />} />
           <Redirect to="/" />
         </Switch>
