@@ -96,7 +96,7 @@ class App extends Component {
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />
           <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} jwt={this.state.jwt}/>} />
           <Route path="/profile" render={(props) => <Profile {...props} current_user={this.state.user} />} />
-          <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} />} />
+          <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} current_user={this.state.user} />} />
           <Redirect to="/" />
         </Switch>
       )
