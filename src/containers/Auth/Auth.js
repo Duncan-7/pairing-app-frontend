@@ -24,15 +24,17 @@ class Auth extends Component {
     
 
     if(this.state.isSignUp) {
+      //all the names are mixed up to make backend work, sorry
       const body = {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password
+        fullName: this.state.username,
+        username: this.state.email,
+        password: this.state.password,
+        active: false
       };
       this.sendSignupRequest(body);
     } else {
       const body = {
-        username: this.state.username,
+        username: this.state.email,
         password: this.state.password
       };
       this.sendLoginRequest(body);
@@ -51,6 +53,7 @@ class Auth extends Component {
 
   sendLoginRequest = (body) => {
     const url = 'http://localhost:8080/login';
+    console.log(body)
     axios.post(url, body)
       .then(response => {
         console.log(response);
@@ -60,11 +63,16 @@ class Auth extends Component {
         responseData = responseData.substr(1).slice(0, -1);
         let properties = responseData.split(", ")
         const id = parseInt(properties[0].split("=")[1], 10);
-        const username = properties[1].split("=")[1].substr(1).slice(0, -1);
+        const email = properties[1].split("=")[1].substr(1).slice(0, -1);
+        const name = properties[2].split("=")[1].substr(1).slice(0, -1);
+        const active = properties[3].split("=")[1] == "false" ? false : true;
         const user = {
           id: id,
-          username: username
+          email: email,
+          name: name,
+          active: active
         }
+        console.log(user)
         this.props.saveCredentials(jwt, user);
       })
   }
@@ -81,7 +89,7 @@ class Auth extends Component {
     <input 
       type="text" 
       placeholder="Username" 
-      name="username" 
+      name="email" 
       onChange={(event) => this.onChangeHandler(event)}/>
     <input 
       type="password" 

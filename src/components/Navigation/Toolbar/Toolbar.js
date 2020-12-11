@@ -4,7 +4,7 @@ import NavigationLinks from '../NavigationLinks/NavigationLinks'
 const Toolbar = (props) => (
   <header className={classes.Toolbar}>
     <nav>
-      <NavigationLinks isAuth={true} userId={props.userId} />
+      <NavigationLinks isAuth={props.isAuth} userId={props.userId} />
     </nav>
   </header>
 )
