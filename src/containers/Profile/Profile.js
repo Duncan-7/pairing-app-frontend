@@ -24,7 +24,7 @@ class Profile extends Component {
     const body = this.state;
     //remove any entries that have been created with no interest
     for(let language in body) {
-      if(body[language] == 'no-interest') {
+      if(body[language] === '0') {
         delete body[language];
       }
     }
@@ -44,10 +44,10 @@ class Profile extends Component {
       return <div>
         <label htmlFor={language}>{language}:</label>
         <select name={language} id={language} onChange={this.handleInputChange}>
-          <option value="no-interest">Not Interested</option>
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="advanced">Advanced</option>
+          <option value="0">Not Interested</option>
+          <option value="1">Beginner</option>
+          <option value="2">Intermediate</option>
+          <option value="3">Advanced</option>
         </select>
       </div>
     })
