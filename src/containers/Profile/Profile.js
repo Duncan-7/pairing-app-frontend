@@ -29,7 +29,7 @@ class Profile extends Component {
       }
     }
     console.log(body)
-    axios.post('/languages', body)
+    axios.post('/languagepreferences', body)
       .then(response => {
         console.log(response)
       })
@@ -37,7 +37,7 @@ class Profile extends Component {
 
   render() {
     //add more languages here to add to the form
-    const languages = ["java", "python", "ruby", "javascript", "C#"];
+    const languages = ["java", "python", "ruby", "javascript", "C#", "C", "PHP", "swift", "go"];
 
     //make each language into a select input
     let languageInputs = languages.map(language => {
