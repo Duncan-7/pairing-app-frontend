@@ -65,7 +65,7 @@ class Auth extends Component {
         const id = parseInt(properties[0].split("=")[1], 10);
         const email = properties[1].split("=")[1].substr(1).slice(0, -1);
         const name = properties[2].split("=")[1].substr(1).slice(0, -1);
-        const active = properties[3].split("=")[1] == "false" ? false : true;
+        const active = properties[3].split("=")[1] === "false" ? false : true;
         const user = {
           id: id,
           email: email,
