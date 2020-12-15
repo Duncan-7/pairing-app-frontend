@@ -21,8 +21,6 @@ class Auth extends Component {
   onSubmitHander = (event) => {
     event.preventDefault();
     
-    
-
     if(this.state.isSignUp) {
       //all the names are mixed up to make backend work, sorry
       const body = {
@@ -45,18 +43,15 @@ class Auth extends Component {
     const url = '/users/sign-up';
     axios.post(url, body)
       .then(response => {
-        console.log(response);
         console.log("User created")
         this.sendLoginRequest(body)
       })
   }
 
   sendLoginRequest = (body) => {
-    const url = 'http://localhost:8080/login';
-    console.log(body)
+    const url = '/login';
     axios.post(url, body)
       .then(response => {
-        console.log(response);
         const jwt = response.headers.authorization.split(" ")[1];
         //get user details from response data, definitely easier way to do this
         let responseData = response.data;
@@ -65,14 +60,13 @@ class Auth extends Component {
         const id = parseInt(properties[0].split("=")[1], 10);
         const email = properties[1].split("=")[1].substr(1).slice(0, -1);
         const name = properties[2].split("=")[1].substr(1).slice(0, -1);
-        const active = properties[3].split("=")[1] == "false" ? false : true;
+        const active = properties[3].split("=")[1] === "false" ? false : true;
         const user = {
           id: id,
           email: email,
           name: name,
           active: active
         }
-        console.log(user)
         this.props.saveCredentials(jwt, user);
       })
   }

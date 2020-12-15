@@ -1,0 +1,14 @@
+.Form {
+  display: flex;
+  align-items: center;
+  
+}
+
+.Send {
+  width:61%;
+  height: 40px;
+  margin-left: 5px;
+  margin-top: 0px;
+  margin-right: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}

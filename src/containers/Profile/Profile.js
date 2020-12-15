@@ -24,14 +24,14 @@ class Profile extends Component {
     const body = this.state;
     //remove any entries that have been created with no interest
     for(let language in body) {
-      if(body[language] == 'no-interest') {
+      if(body[language] === 'no-interest') {
         delete body[language];
       }
     }
     console.log(body)
-    axios.post('/languages', body)
+    axios.post('/languagepreferences', body)
       .then(response => {
-        console.log(response)
+        console.log(response);
       })
   }
 
