@@ -20,12 +20,24 @@ class ShowProfile extends Component {
       })
   }
 
+  // getLanguages = () => {
+  //   axios.get('/languagepreferences')
+  //     .then(response => {
+  //       console.log(response);
+  //     })
+  // }
+
   render() {
 
     return(
       <div>
-        COMPLETED PROFILE M8!
-        <Button btnType="Neutral" clicked={this.toggleActive}>
+        <h1> {this.props.user.fullName}'s Profile</h1><br></br>
+
+        <strong>Github: </strong><a href={this.props.user.github}>{this.props.user.fullName}'s Github</a><br></br>
+
+        <strong>Languages:</strong> 
+
+        <br></br><Button btnType="Neutral" clicked={this.toggleActive}>
           {this.props.user.active ? "Become Inactive" : "Become Active"}
         </Button>
       </div>
