@@ -13,11 +13,13 @@ class Profile extends Component {
   render() {
    let profile = null;
 
+
     if (this.props.current_user.profileComplete){
       profile = <ShowProfile user={this.props.current_user} saveUser={this.props.saveUser} />
     } else {
       profile = <CreateProfile user={this.props.current_user} saveUser={this.props.saveUser}/>
     }
+
 
     return(
       <div>
