@@ -1,0 +1,14 @@
+.Selected {
+  background-color: #4BB3FD;
+}
+
+.Conversation {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid darkslategray;
+}
+
+.New {
+  color: red;
+  margin-left: 5px;
+}

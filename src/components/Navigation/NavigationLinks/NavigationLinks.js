@@ -11,6 +11,7 @@ const NavigationLinks = (props) => {
       <NavigationLink link="/" exact>Home</NavigationLink>
       <NavigationLink link="/profile">Profile</NavigationLink>
       <NavigationLink link="/matches">Matches</NavigationLink>
+      <NavigationLink link="/messages">Messages</NavigationLink>
       <NavigationLink link="/logout">Logout</NavigationLink>
     </ul>
   }

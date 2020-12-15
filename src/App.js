@@ -5,6 +5,8 @@ import Spinner from './components/UI/Spinner/Spinner';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
 import Matches from './containers/Matches/Matches';
+import Messages from './containers/Messages/Messages';
+
 
 import './App.css';
 import Home from './components/Home/Home';
@@ -71,6 +73,10 @@ class App extends Component {
   }
 
   logout = () => {
+    axios.post('/users/logout', {})
+      .then(response => {
+        console.log(response);
+      })
     this.setState({
       jwt: null
     })
@@ -94,8 +100,9 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />
-          <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} jwt={this.state.jwt}/>} />
+          <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} />} />
           <Route path="/profile" render={(props) => <Profile {...props} current_user={this.state.user} />} />
+          <Route path="/messages" render={(props) => <Messages {...props} current_user={this.state.user} />} />
           <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} current_user={this.state.user} />} />
           <Redirect to="/" />
         </Switch>
