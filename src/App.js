@@ -25,14 +25,32 @@ class App extends Component {
   }
   
   //save JWT and user details in local storage on login
-  saveCredentials = (jwt, user) => {
+  saveJWT = (jwt) => {
+    console.log("Saving JWT:");
+    console.log(jwt);
     this.setState({
-      jwt: jwt,
-      user: user
+      jwt: jwt
     })
     localStorage.setItem('jwt', jwt);
-    localStorage.setItem('user', JSON.stringify(user));
+    
     this.setAxiosInterceptor(jwt);
+  }
+
+  saveUser = (user) => {
+    this.setState({
+      user: user
+    })
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  saveCredentials = (jwt, user) => {
+    console.log("In save credentials:");
+    console.log(jwt);
+    console.log(user);
+    this.saveUser(user);
+    this.saveJWT(jwt);
+    
+    
   }
 
   //on startup check if there are saved credentials
@@ -100,9 +118,12 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />
-          <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} />} />
-          <Route path="/profile" render={(props) => <Profile {...props} current_user={this.state.user} />} />
+
+          <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} jwt={this.state.jwt}/>} />
+          <Route path="/profile" render={(props) => <Profile {...props} current_user={this.state.user} saveUser={this.saveUser} />} />
+
           <Route path="/messages" render={(props) => <Messages {...props} current_user={this.state.user} />} />
+
           <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} current_user={this.state.user} />} />
           <Redirect to="/" />
         </Switch>

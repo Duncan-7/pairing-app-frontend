@@ -27,7 +27,8 @@ class Auth extends Component {
         fullName: this.state.username,
         username: this.state.email,
         password: this.state.password,
-        active: false
+        active: false,
+        profileComplete: false
       };
       this.sendSignupRequest(body);
     } else {
@@ -53,6 +54,7 @@ class Auth extends Component {
     axios.post(url, body)
       .then(response => {
         const jwt = response.headers.authorization.split(" ")[1];
+        console.log(jwt);
         //get user details from response data, definitely easier way to do this
         let responseData = response.data;
         responseData = responseData.substr(1).slice(0, -1);
@@ -61,11 +63,15 @@ class Auth extends Component {
         const email = properties[1].split("=")[1].substr(1).slice(0, -1);
         const name = properties[2].split("=")[1].substr(1).slice(0, -1);
         const active = properties[3].split("=")[1] === "false" ? false : true;
+        const profileComplete = properties[4].split("=")[1] === "false" ? false : true;
+        const github = properties[5].split("=")[1].substr(1).slice(0, -1);
         const user = {
           id: id,
           email: email,
-          name: name,
-          active: active
+          fullName: name,
+          active: active,
+          profileComplete: profileComplete,
+          github: github
         }
         this.props.saveCredentials(jwt, user);
       })
