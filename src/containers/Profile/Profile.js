@@ -37,7 +37,7 @@ class Profile extends Component {
 
   render() {
     //add more languages here to add to the form
-    const languages = ["java", "python", "ruby", "javascript", "C#"];
+    const languages = ["java", "python", "ruby", "javascript", "C#", "C", "PHP", "swift", "go"];
 
     //make each language into a select input
     let languageInputs = languages.map(language => {
