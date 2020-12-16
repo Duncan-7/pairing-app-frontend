@@ -40,6 +40,7 @@ class CreateProfile extends Component {
         const updatedUser = response.data
         /////////
         this.props.saveUser(updatedUser)
+        this.props.setUser();
       })
   }
 

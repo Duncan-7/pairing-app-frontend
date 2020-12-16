@@ -55,16 +55,12 @@ class Auth extends Component {
       .then(response => {
         const jwt = response.headers.authorization.split(" ")[1];
         console.log(jwt);
+        this.props.saveJWT(jwt);
         const id = response.data
-        let config = {
-          headers: {
-            "Authorization": "Bearer " + jwt,
-          }
-        }
-        axios.get('/users/' + id, config)
+        axios.get('/users/' + id)
           .then(response => {
             const user = response.data;
-            this.props.saveCredentials(jwt, user);
+            this.props.saveUser(user);
           })
         
       })

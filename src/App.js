@@ -73,11 +73,6 @@ class App extends Component {
   }
 
   testJWT = () => {
-    // let config = {
-    //   headers: {
-    //     'Authorization': 'Bearer ' + this.state.jwt
-    //   }
-    // }
     axios.get('/test')
       .then(response => {
         console.log(response);
@@ -85,10 +80,6 @@ class App extends Component {
   }
 
   logout = () => {
-    // axios.post('/users/logout', {})
-    //   .then(response => {
-    //     console.log(response);
-    //   })
     this.setState({
       jwt: null
     })
@@ -102,13 +93,14 @@ class App extends Component {
         <Switch>
           <Route path="/auth" render={(props) => <Auth 
                                                     {...props} 
-                                                    saveCredentials={this.saveCredentials}/>} />
+                                                    saveUser={this.saveUser}
+                                                    saveJWT={this.saveJWT} />} />
           <Redirect to="/auth" />
         </Switch>
       )
     }
 
-    if (this.state.jwt) {
+    if (this.state.jwt && this.state.user) {
       routes = (
         <Switch>
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />

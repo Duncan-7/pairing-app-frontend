@@ -47,7 +47,7 @@ class Profile extends Component {
                     saveUser={this.props.saveUser}
                     updateUser={this.setUser}/>
       } else if(!this.state.user.profileComplete && this.state.isCurrentUser) {
-        profile = <CreateProfile user={this.state.user} saveUser={this.props.saveUser}/>
+        profile = <CreateProfile user={this.state.user} saveUser={this.props.saveUser} setUser={this.setUser}/>
       } else {
         profile = <p>This user has not completed their profile, please try again later.</p>
       }
