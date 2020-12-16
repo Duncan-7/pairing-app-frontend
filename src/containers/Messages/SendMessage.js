@@ -25,13 +25,26 @@ class SendMessage extends Component {
     axios.post("/messages", body)
       .then(response => {
         console.log(response);
+        this.setState({
+          content: ""
+        })
         this.props.getMessages();
       })
   }
 
+  submitFromKeyboard = (event) => {
+    if(event.keyCode === 13) {
+      this.submitHandler(event);
+    }
+  }
+
   render() {
     return <form className={classes.Form} onSubmit={this.submitHandler}>
-      <textarea className={classes.Send} onChange={this.onChangeHandler} value={this.state.content}></textarea>
+      <textarea 
+        className={classes.Send} 
+        onChange={this.onChangeHandler} 
+        value={this.state.content}
+        onKeyDown={this.submitFromKeyboard}></textarea>
       <Button btnType="Success">Send</Button>
     </form>
   }

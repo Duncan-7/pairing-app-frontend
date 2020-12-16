@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import axios from '../../axios-instance';
 import classes from './Messages.module.css';
-import Aux from '../../hoc/Aux/Aux';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SendMessage from './SendMessage';
 import Conversation from './Conversation';
@@ -107,7 +106,7 @@ class Messages extends Component {
       })
       messageForm = <SendMessage
         sender={this.props.current_user}
-        receiver={this.state.conversations[this.state.showConversation][0].sender.id == this.props.current_user.id ? this.state.conversations[this.state.showConversation][0].receiver : this.state.conversations[this.state.showConversation][0].sender}
+        receiver={this.state.conversations[this.state.showConversation][0].sender.id === this.props.current_user.id ? this.state.conversations[this.state.showConversation][0].receiver : this.state.conversations[this.state.showConversation][0].sender}
         getMessages={this.getMessages}/>
     }
 

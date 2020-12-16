@@ -55,25 +55,18 @@ class Auth extends Component {
       .then(response => {
         const jwt = response.headers.authorization.split(" ")[1];
         console.log(jwt);
-        //get user details from response data, definitely easier way to do this
-        let responseData = response.data;
-        responseData = responseData.substr(1).slice(0, -1);
-        let properties = responseData.split(", ")
-        const id = parseInt(properties[0].split("=")[1], 10);
-        const email = properties[1].split("=")[1].substr(1).slice(0, -1);
-        const name = properties[2].split("=")[1].substr(1).slice(0, -1);
-        const active = properties[3].split("=")[1] === "false" ? false : true;
-        const profileComplete = properties[4].split("=")[1] === "false" ? false : true;
-        const github = properties[5].split("=")[1].substr(1).slice(0, -1);
-        const user = {
-          id: id,
-          email: email,
-          fullName: name,
-          active: active,
-          profileComplete: profileComplete,
-          github: github
+        const id = response.data
+        let config = {
+          headers: {
+            "Authorization": "Bearer " + jwt,
+          }
         }
-        this.props.saveCredentials(jwt, user);
+        axios.get('/users/' + id, config)
+          .then(response => {
+            const user = response.data;
+            this.props.saveCredentials(jwt, user);
+          })
+        
       })
   }
 

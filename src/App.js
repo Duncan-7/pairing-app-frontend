@@ -16,7 +16,8 @@ import axios from './axios-instance';
 class App extends Component {
   state = {
     jwt: null,
-    loaded: false
+    loaded: false,
+    user: null
   }
 
   componentDidMount() {
@@ -26,8 +27,6 @@ class App extends Component {
   
   //save JWT and user details in local storage on login
   saveJWT = (jwt) => {
-    console.log("Saving JWT:");
-    console.log(jwt);
     this.setState({
       jwt: jwt
     })
@@ -44,13 +43,8 @@ class App extends Component {
   }
 
   saveCredentials = (jwt, user) => {
-    console.log("In save credentials:");
-    console.log(jwt);
-    console.log(user);
     this.saveUser(user);
     this.saveJWT(jwt);
-    
-    
   }
 
   //on startup check if there are saved credentials
@@ -91,10 +85,10 @@ class App extends Component {
   }
 
   logout = () => {
-    axios.post('/users/logout', {})
-      .then(response => {
-        console.log(response);
-      })
+    // axios.post('/users/logout', {})
+    //   .then(response => {
+    //     console.log(response);
+    //   })
     this.setState({
       jwt: null
     })
@@ -118,12 +112,9 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" render={(props) => <Logout {...props} onLogout={this.logout} />} />
-
           <Route path="/matches" render={(props) => <Matches {...props} current_user={this.state.user} jwt={this.state.jwt}/>} />
-          <Route path="/profile" render={(props) => <Profile {...props} current_user={this.state.user} saveUser={this.saveUser} />} />
-
+          <Route path="/profile/:id" render={(props) => <Profile {...props} current_user={this.state.user} saveUser={this.saveUser} />} />
           <Route path="/messages" render={(props) => <Messages {...props} current_user={this.state.user} />} />
-
           <Route path="/" exact render={(props) => <Home {...props} testJWT={this.testJWT} current_user={this.state.user} />} />
           <Redirect to="/" />
         </Switch>
@@ -131,7 +122,7 @@ class App extends Component {
     }
 
     return (
-      <Layout isAuth={!!this.state.jwt}>
+      <Layout isAuth={!!this.state.jwt} userId={this.state.user ? this.state.user.id : null}>
         <div className="App">
           {routes}
         </div>
