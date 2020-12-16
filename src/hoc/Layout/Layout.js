@@ -7,7 +7,7 @@ class Layout extends Component {
   render() {
     return (
       <Aux>
-        <Toolbar isAuth={this.props.isAuth} />
+        <Toolbar isAuth={this.props.isAuth} userId={this.props.userId} />
         <main className={classes.Content}>
           {this.props.children}
         </main>

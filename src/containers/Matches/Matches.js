@@ -35,29 +35,46 @@ class Matches extends Component {
     axios.post(url, body)
       .then(response => {
         console.log(response);
+        this.getMatches();
+      })
+  }
+
+  completeMatch = (match_id) => {
+    axios.post('/matches/complete/' + match_id)
+      .then(response => {
+        console.log(response)
+        this.getMatches();
       })
   }
 
   formatDate = (date) => {
     const newDate = new Date(date);
-    return moment(newDate).format('h:mm:ss a, MMMM Do YYYY');
+    return moment(newDate).format('MMMM Do YYYY');
   }
 
   render() {
     let matches = <Spinner />
     if (this.state.loaded) {
-      matches = this.state.matches.map(match => {
-        return <Match 
-                  key={match.id}
-                  user1={match.user1}
-                  user2={match.user2}
-                  startTime={this.formatDate(match.start_time)} />
-      })
+      if(this.state.matches.length === 0) {
+        matches = <p>You don't have any matches at the moment. Check back soon!</p>
+      } else {
+        matches = this.state.matches.map(match => {
+          return <Match 
+                    key={match.id}
+                    id={match.id}
+                    user1={match.user1}
+                    user2={match.user2}
+                    language={match.language.name}
+                    startTime={this.formatDate(match.start_time)} 
+                    complete={match.complete} 
+                    completeMatch={this.completeMatch}/>
+        })
+      } 
     }
     return(
       <Aux>
         <Button btnType="Neutral" clicked={this.createMatches}>Make Matches</Button>
-        <h1>Here are your matches:</h1>
+        <h2>Matches:</h2>
         {matches}
       </Aux>
     )
