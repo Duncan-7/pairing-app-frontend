@@ -29,7 +29,14 @@ Here's the database schema:
 
 ### Pairing Algorithm
 
+Starts with list of all users signed up and filters them down through the following criteria to find the most optimal matches:
+1. Users that are active
+2. Users that have the fewest selected language preferences
+3. Users that have at least one language in common
+4. Users that haven't been paired together before
+5. Users that have the most similar ability rating in the selected language
 
+Users will therefore get to pair with as many people as possible whilst always having a number of factors in common.
 
 ### Try it!
 
