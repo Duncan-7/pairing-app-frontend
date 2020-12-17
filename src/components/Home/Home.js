@@ -3,9 +3,10 @@ import Button from '../UI/Button/Button';
 const Home = (props) => {
   return (
     <div>
-      <h3>Welcome to *insert pair based pun here*, {props.current_user.fullName}.</h3>
-      <p>Some text telling everyone how cool our website is.</p>
-      <Button btnType="Neutral" clicked={props.testJWT}>Test Authentication</Button>
+      <h3>Welcome to Pair Tree, localhost's premiere app for pair programming.</h3>
+      <p>Complete your profile to enter the pairing pool, and each week you'll be matched with another user with similar interests and experience to yourself.</p>
+      <p>Pair programming is an amazing way to make coding more fun while learning from others!</p>
+      <h3>No more despairing, time for pairing!</h3>
     </div>
   )
 }
