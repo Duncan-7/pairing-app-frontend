@@ -17,7 +17,7 @@ Check out the backend: <a href="https://github.com/Duncan-7/pairing-app-backend"
 
 Here's the database schema:
 
-[comment]: <> (<img src="images/db_schema_updated.png" width="700" height="500">)
+<img src="images/db_schema.png" width="700" height="500">
 
 ### Features
 
